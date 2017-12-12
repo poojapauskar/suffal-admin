@@ -11,7 +11,14 @@ if($_SESSION['login_suffal_app'] == 1){
 ?>
 <html>
   <head>
-   
+   <title></title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- <link rel="stylesheet" type="text/css" href="css/material.indigo-pink.min.css"> -->
+ <meta name="viewport" content="width=device-width, arinitial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="autocomplete-Files/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -49,6 +56,24 @@ if(isset($_POST['submit'])){
         $arr = json_decode($result,true);
         /*echo $arr['signed_urls'][0][0];*/
 
+        /*var_dump($_POST['key'][0]);*/
+        /*echo $_POST['value'];*/
+
+        $key_value=[];
+        for ($k=0;$k<count($_POST['key']);$k++){
+          $array1=[];
+          $key1= $_POST["key"][$k];
+          $value1= $_POST["value"][$k];
+          $array1= "{'Key':'".$key1."', 'Value':'".$value1."'}";
+          array_push($key_value,$array1);
+        }
+        $_SESSION['description']= $key_value;
+        $description= implode(",", $_SESSION['description']);
+       
+        /*echo "[".$description."]";*/
+        /*var_dump($key_value);*/
+        // echo $key_value;
+
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         if(is_uploaded_file($_FILES['image']['tmp_name']) && !($_FILES['image']['error'])) {
             $url_upload = $arr['signed_urls'][0][0];
@@ -74,12 +99,13 @@ if(isset($_POST['submit'])){
           } else {
               $image_id="";
           }
-
+   
+   
 
    $url = 'https://suffalproject.herokuapp.com/campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
    $data = array(
               'name' => $_POST['name'],
-              'description' => $_POST['description'],
+              'description' => $description,
               'item' => $_POST['item'],
               'price' => $_POST['price'],
               'no_of_people' => $_POST['number_of_ppl'],
@@ -114,7 +140,13 @@ if(isset($_POST['submit'])){
     <br><br>
 
     <label>Description</label><br>
-    <input type="text" id="description" name="description"/>
+      <div class="present_fields_1">
+          <input type="text" name="key[]" placeholder="key"/><input type="text" name="value[]" placeholder="value"/>
+          <div class="input_fields" style="color:black"><br>
+           <button type="button" class="add_field btn ">Add More</button>
+          </div>
+      </div>
+    
     <br><br>
 
     <label>Item</label><br>
@@ -152,5 +184,37 @@ if(isset($_POST['submit'])){
   </button> -->
   </form>
 
+
+ <script type="text/javascript">
+$(document).ready(function() {
+ 
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields"); //Fields wrapper
+    var add_button      = $(".add_field"); //Add button ID
+    var wrapper_pre1         = $(".present_fields_1"); //Fields wrapper
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+      /* alert("hi");*/
+        e.preventDefault();
+
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $('<div><input type="text" name="key[]" placeholder="key"/><input type="text" name="value[]" placeholder="value"/><a href="#" class="remove_field">Remove</a></div><br>').insertBefore(add_button)//add input box\
+          
+
+      }
+    });
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+
+    $(wrapper_pre1).on("click",".remove_field_pre1", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+      
+  });
+
+  
+</script>
     </body>
     </html>

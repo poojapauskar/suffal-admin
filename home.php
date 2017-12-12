@@ -83,11 +83,24 @@ session_start();
 
   <tbody>
     <?php for($x=0;$x<count($arr_get_campaigns);$x++){?>
+
+<?php /*echo $arr_get_campaigns[$x]['campaign_detail']['description']; */
+$arr1 = $arr_get_campaigns[$x]['campaign_detail']['description'];
+$arr1=str_replace("[","",$arr1);
+$arr1=str_replace("]","",$arr1);
+
+/*echo $arr1;*/
+/*
+$pattern = '~{[^}]*}?(*SKIP)(*F)|,~';
+$arr_split=preg_split($pattern, $arr1);
+print_r($arr_split);
+echo "<br><br>";*/
+?>
       <tr> 
         <td><img style="height:40%" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['name']; ?></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></td>
-        <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['description']; ?></td>
+        <td></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['price']; ?></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['no_of_people']; ?></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['start_date']; ?></td>
