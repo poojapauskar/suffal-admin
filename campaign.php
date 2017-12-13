@@ -115,7 +115,7 @@ $var=strstr($variable, 'TO', true);
       <tr> 
         <!-- <td><img style="height:40%" src="<?php echo $arr_get_ppl_in_campaign[$x]['image_url']; ?>"></img></td> -->
         <td><?php echo $x+1; ?></td>
-        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['firstname']; ?></td>
+        <td><?php echo $arr_get_campaign_user_detail[0]['user_data']['firstname']." ".$arr_get_campaign_user_detail[0]['user_data']['lastname']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['uid']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['mobile']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['email']; ?></td>

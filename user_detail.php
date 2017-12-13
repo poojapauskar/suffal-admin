@@ -11,6 +11,14 @@ if($_SESSION['login_suffal_app'] == 1){
 ?>
 <html>
   <head>
+
+<style type="text/css">
+  label{
+    font-weight: normal !important;
+    width:150px;
+  }
+
+</style>
    <title></title>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -36,7 +44,7 @@ if($_SESSION['login_suffal_app'] == 1){
   );
   $context_get_campaign_user_detail = stream_context_create($options_get_campaign_user_detail);
   $output_get_campaign_user_detail = file_get_contents($url_get_campaign_user_detail, false,$context_get_campaign_user_detail);
-  /*echo $output_get_campaign_user_detail;*/
+  // echo $output_get_campaign_user_detail;
   $arr_get_campaign_user_detail = json_decode($output_get_campaign_user_detail,true);
  /* echo $arr_get_campaign_user_detail[0]['user_data'][0]['user_data']['name'];
   echo $arr_get_campaign_user_detail[0]['campaign_data']['name'];*/
@@ -49,40 +57,40 @@ function goBack() {
 }
 </script>
 <button onclick="goBack()">Back</button>
-<h2 style="margin-top:3%;margin-left:3%;text-align:center"><?php echo $arr_get_campaign_user_detail[0]['campaign_data']['name']; ?></h2>
 
-  <form  action="#" enctype="multipart/form-data" style="margin-top:1%;margin-left:25%" method="post">
-      
-    <!-- <label>Name</label><br>
-    <input type="text" id="name" name="name" required/>
-    <br><br> -->
-    <label>Product</label><br>
-    <input type="text" id="item" name="item" required/>
+<h2 style="margin-top:3%;text-align:center"><?php echo $arr_get_campaign_user_detail[0]['campaign_data']['name']; ?></h2>
+
+<div style="margin-left:20%;margin-top:4%">
+    <label>Name :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['user_data']['firstname']." ".$arr_get_campaign_user_detail[0]['user_data']['lastname']; ?></b>
     <br>
-    <label>Product Price</label><br>
-    <input type="text" id="actual_price" name="actual_price" required/>
+    <label>Unique Id :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['uid']; ?></b>
     <br>
-    <label>Offer Price</label><br>
-    <input type="text" id="offer_price" name="offer_price" required/>
+    <label>Mobile :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['user_data']['mobile']; ?></b>
     <br>
-    <label>Number Of members per product</label><br>
-    <input type="text" id="number_of_ppl" name="number_of_ppl" required/>
+    <label>Email :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['user_data']['email']; ?></b>
     <br>
+    <label>Date of Birth :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['user_data']['dob']; ?></b>
+    <br>
+    <label>Date of Joining :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['date_of_joining']; ?></b>
+    <br>
+    <label>Address :</label>
+    <b><?php echo $arr_get_campaign_user_detail[0]['user_data']['address']; ?></b>
+    <br>
+</div> 
 
-    <div style="margin-left:40%;margin-top:-30%">
-    <img src="images/add_image.png" style="height:80px"></img>
-    <input type="file" id="image" name="image"></input>
-    <label style="margin-top:1%">Add Image</label>
-    </div>
-
-
-      <!-- Accent-colored raised button with ripple -->
-  <div>
-  <button name="submit" id="submit" style="margin-top:20%;margin-left:25%" class="btn-primary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-    Launch Campagne
-  </button>
-  </div>
-
+<div style="margin-left:60%;margin-top:-12%">
+    <img src="<?php echo $arr_get_campaign_user_detail[0]['image_url']['profile']; ?>" style="height:80px"></img><br><br>
+    <!-- <button><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>" download>VIEW PAN</td></button><br>
+    <button><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar']; ?>" download>VIEW AADHAR</td></button> -->
+    <button onclick="window.location.href='<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>'">VIEW PAN</button><br><br>
+    <button onclick="window.location.href='<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar'] ?>'">VIEW AADHAR</button>
+    </div>   
 
     </body>
     </html>
