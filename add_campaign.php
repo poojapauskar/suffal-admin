@@ -58,17 +58,6 @@ if(isset($_POST['submit'])){
 
         /*var_dump($_POST['key'][0]);*/
         /*echo $_POST['value'];*/
-
-        $key_value=[];
-        for ($k=0;$k<count($_POST['key']);$k++){
-          $array1=[];
-          $key1= $_POST["key"][$k];
-          $value1= $_POST["value"][$k];
-          $array1= "{'Key':'".$key1."', 'Value':'".$value1."'}";
-          array_push($key_value,$array1);
-        }
-        $_SESSION['description']= $key_value;
-        $description= implode(",", $_SESSION['description']);
        
         /*echo "[".$description."]";*/
         /*var_dump($key_value);*/
@@ -105,7 +94,7 @@ if(isset($_POST['submit'])){
    $url = 'https://suffalproject.herokuapp.com/campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
    $data = array(
               'name' => $_POST['name'],
-              'description' => $description,
+              'description' => '',
               'item' => $_POST['item'],
               'price' => $_POST['price'],
               'no_of_people' => $_POST['number_of_ppl'],
@@ -125,6 +114,28 @@ if(isset($_POST['submit'])){
     $result = file_get_contents($url, false, $context);
     
     $arr = json_decode($result,true);
+    $_SESSION['pk_key']= $arr['pk'];
+
+
+    for ($k=0;$k<count($_POST['key']);$k++){
+      $url_key = 'https://suffalproject.herokuapp.com/description/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+      $data_key = array(
+              'campaign_id' => $_SESSION['pk_key'],
+              'key' => $_POST['key'][$k],
+              'value' => $_POST['value'][$k]
+            );
+
+      $options_key = array(
+        'http' => array(
+          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'method'  => 'POST',
+          'content' => http_build_query($data_key),
+        ),
+      );
+      $context_key  = stream_context_create($options_key);
+      $result_key = file_get_contents($url_key, false, $context_key);
+    }
+
     echo "<script type='text/javascript'>alert('New Campaign Added')</script>";
 }
 ?>

@@ -57,7 +57,7 @@ session_start();
   $output_get_campaigns = file_get_contents($url_get_campaigns, false,$context_get_campaigns);
   /*echo $output_get_campaigns;*/
   $arr_get_campaigns = json_decode($output_get_campaigns,true);
-  /*echo $arr_get_campaigns[0]['image_url'];*/
+/*  echo $arr_get_campaigns[0]['description_detail'];*/
   
 ?>
 
@@ -90,17 +90,23 @@ $arr1=str_replace("[","",$arr1);
 $arr1=str_replace("]","",$arr1);
 
 /*echo $arr1;*/
-/*
-$pattern = '~{[^}]*}?(*SKIP)(*F)|,~';
+
+/*$pattern = '~{[^}]*}?(*SKIP)(*F)|,~';
 $arr_split=preg_split($pattern, $arr1);
-print_r($arr_split);
-echo "<br><br>";*/
+print_r($arr_split);*/
+
+
+
 ?>
       <tr> 
         <td><img style="height:40%" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['name']; ?></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></td>
-        <td></td>
+        <td>
+          <?php for($y=0;$y<count($arr_get_campaigns[$x]['description_detail']);$y++){
+          echo $arr_get_campaigns[$x]['description_detail'][$y]['key']." : ".$arr_get_campaigns[$x]['description_detail'][$y]['value'];echo "<br>";
+          }?>
+        </td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['price']; ?></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['no_of_people']; ?></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['start_date']; ?></td>
