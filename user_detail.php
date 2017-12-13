@@ -22,6 +22,26 @@ if($_SESSION['login_suffal_app'] == 1){
   </head>
   <body>
 
+<?php
+
+  $url_get_campaign_user_detail = 'https://suffalproject.herokuapp.com/get_campaign_user_detail/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+  $options_get_campaign_user_detail = array(
+    'http' => array(
+      'header'  => array(
+                  'USER-ID: '.$_GET['user_id'],
+                  'CAMPAIGN-ID: '.$_GET['cid']
+                ),
+      'method'  => 'GET',
+    ),
+  );
+  $context_get_campaign_user_detail = stream_context_create($options_get_campaign_user_detail);
+  $output_get_campaign_user_detail = file_get_contents($url_get_campaign_user_detail, false,$context_get_campaign_user_detail);
+  /*echo $output_get_campaign_user_detail;*/
+  $arr_get_campaign_user_detail = json_decode($output_get_campaign_user_detail,true);
+ /* echo $arr_get_campaign_user_detail[0]['user_data'][0]['user_data']['name'];
+  echo $arr_get_campaign_user_detail[0]['campaign_data']['name'];*/
+  
+?>
 
 <script>
 function goBack() {
@@ -29,7 +49,7 @@ function goBack() {
 }
 </script>
 <button onclick="goBack()">Back</button>
-<h2 style="margin-top:3%;margin-left:3%;text-align:center">New Campagne</h2>
+<h2 style="margin-top:3%;margin-left:3%;text-align:center"><?php echo $arr_get_campaign_user_detail[0]['campaign_data']['name']; ?></h2>
 
   <form  action="#" enctype="multipart/form-data" style="margin-top:1%;margin-left:25%" method="post">
       
