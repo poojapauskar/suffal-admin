@@ -71,7 +71,7 @@ session_start();
   
 ?>
 
-<h3 style="text-align:center;margin-top:4%"><?php echo $arr_get_campaigns[0]['campaign_detail']['item']; ?></h3>
+<h3 style="text-align:center;margin-top:4%"><?php echo $arr_get_campaigns[0]['campaign_detail']['name']; ?></h3>
 
 <script>
 function goBack() {

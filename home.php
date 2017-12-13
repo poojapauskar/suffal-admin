@@ -83,12 +83,12 @@ session_start();
 <div class="row" style="text-align:center">
     <div class="col-sm-6" onclick="window.location.href='details.php?pk=<?php echo $arr_get_campaigns[$x]['campaign_detail']['pk'];?>'">
       <img style="height:150px" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img>
-      <h3><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></h3>
+      <h3><?php echo $arr_get_campaigns[$x]['campaign_detail']['name']; ?></h3>
     </div>
     <?php $x++; ?>
     <div class="col-sm-6" onclick="window.location.href='details.php?pk=<?php echo $arr_get_campaigns[$x]['campaign_detail']['pk'];?>'">
       <img style="height:150px" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img>
-      <h3><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></h3>
+      <h3><?php echo $arr_get_campaigns[$x]['campaign_detail']['name']; ?></h3>
     </div>
   </div>
 <?php }?>
@@ -131,7 +131,7 @@ print_r($arr_split);*/
       <tr> 
         <td><img style="height:40%" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img></td>
         <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['name']; ?></td>
-        <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></td>
+        <td><?php echo $arr_get_campaigns[$x]['campaign_detail']['name']; ?></td>
         <td>
           <?php for($y=0;$y<count($arr_get_campaigns[$x]['description_detail']);$y++){
           echo $arr_get_campaigns[$x]['description_detail'][$y]['key']." : ".$arr_get_campaigns[$x]['description_detail'][$y]['value'];echo "<br>";

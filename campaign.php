@@ -71,7 +71,7 @@ function goBack() {
 <h3>Number of people qualified :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_qualified']; ?></h3>
 <h3>Number of people confirmed :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_confirmed']; ?></h3> -->
 
-<h2 style="text-align:center;margin-top:4%"><?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['item']; ?></h2>
+<h2 style="text-align:center;margin-top:4%"><?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['name']; ?></h2>
 
 <?php
 

@@ -93,9 +93,9 @@ if(isset($_POST['submit'])){
 
    $url = 'https://suffalproject.herokuapp.com/campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
    $data = array(
-              'name' => '',
+              'name' => $_POST['name'],
               'description' => '',
-              'item' => $_POST['item'],
+              'item' => '',
               'actual_price' => $_POST['actual_price'],
               'offer_price' => $_POST['offer_price'],
               'no_of_people' => $_POST['number_of_ppl'],
@@ -152,11 +152,9 @@ function goBack() {
 
   <form  action="#" enctype="multipart/form-data" style="margin-top:1%;margin-left:25%" method="post">
       
-    <!-- <label>Name</label><br>
-    <input type="text" id="name" name="name" required/>
-    <br><br> -->
+    
     <label>Product</label><br>
-    <input type="text" id="item" name="item" required/>
+    <input type="text" id="name" name="name" required/>
     <br>
     <label>Product Price</label><br>
     <input type="text" id="actual_price" name="actual_price" required/>
