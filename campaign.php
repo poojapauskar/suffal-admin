@@ -45,7 +45,8 @@ tbody {
   $options_get_ppl_in_campaign = array(
     'http' => array(
       'header'  => array(
-                  'PK: '.$_GET['pk']
+                  'PK: '.$_GET['pk'],
+                  'FILTER: '.$_GET['filter']
                 ),
       'method'  => 'GET',
     ),
@@ -59,41 +60,82 @@ tbody {
   
 ?>
 
- <a href="home.php">Back</a><br>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+<button onclick="goBack()">Back</button>
 
-<h3>Number of people joined : <?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_joined']; ?></h3>
+<!-- <h3>Number of people joined : <?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_joined']; ?></h3>
 <h3>Number of people qualified :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_qualified']; ?></h3>
-<h3>Number of people confirmed :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_confirmed']; ?></h3>
+<h3>Number of people confirmed :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_confirmed']; ?></h3> -->
 
-<h2 style="text-align:center;margin-top:4%">People in <?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['name']; ?></h2>
+<h2 style="text-align:center;margin-top:4%"><?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['item']; ?></h2>
+
+<?php
+
+if($_GET['filter'] == "total"){
+  $head1="Total Participants";
+}elseif($_GET['filter'] == "beneficiary"){
+  $head1="Total Beneficiary";
+}elseif($_GET['filter'] == "cancelled"){
+  $head1="Cancellation";
+}elseif($_GET['filter'] == "transferred"){
+  $head1="Transfers";
+}
+
+?>
+
+<h4 style="text-align:center;"><?php echo $head1;echo " "; echo $arr_get_ppl_in_campaign[0]['total_number']; ?></h4>
+
 <table style="margin-top:3%" id="example" class="mdl-data-table" cellspacing="0" width="100%">
   <thead>
     <tr>
-        <!-- <th>Name</th> -->
+        <th>Sl. No.</th>
         <th>Name</th>
+        <th>Unique ID</th>
         <th>Mobile</th>
         <th>Email</th>
-        <th>Pan</th>
-        <th>Aadhar</th>
-        <th>Status</th>
+        <th>DOJ</th>
+        <th>Details</th>
     </tr>
   </thead>
 
   <tbody>
+
+
+
     <?php for($x=0;$x<count($arr_get_ppl_in_campaign[0]['user_data']);$x++){?>
+
+<?php
+$variable=$arr_get_ppl_in_campaign[0]['user_data'][$x]['joined_date'];
+$var=strstr($variable, 'TO', true);
+?>
       <tr> 
         <!-- <td><img style="height:40%" src="<?php echo $arr_get_ppl_in_campaign[$x]['image_url']; ?>"></img></td> -->
-        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['name']; ?></td>
+        <td><?php echo $x+1; ?></td>
+        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['firstname']; ?></td>
+        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['uid']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['mobile']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['email']; ?></td>
-        <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['pan_details']; ?>" download>Pan Card</td>
-        <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['aadhar_card_details']; ?>" download>Aadhar Card</td>
-        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['status']; ?></td>
+        <td><?php echo $variable; ?></td>
+        <!-- <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['pan_details']; ?>" download>Pan Card</td>
+        <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['aadhar_card_details']; ?>" download>Aadhar Card</td> -->
+        <td>
+          <form method="post" action="user_detail.php?cid=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>&user_id=<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>">
+            <button type="submit">Details</button>
+            </form>
+        </td>
         
       </tr>
     <?php }?>
   </tbody>
 </table>
+
+<?php if(count($arr_get_ppl_in_campaign[0]['user_data']) == 0){?>
+<h3 style="text-align:center">No records found</h3>
+ <?php }?>
 
     </body>
     </html>

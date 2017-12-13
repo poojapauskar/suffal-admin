@@ -13,6 +13,13 @@ if($_SESSION['login_suffal_app'] == 1){
 <html lang="en">
   <head>
 
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style type="text/css">
   thead,td,th{
       border: 1px solid black ;
@@ -61,12 +68,35 @@ session_start();
   
 ?>
 
+<h5 style="text-align:center">Admin Portal</h5>
 
-<a href="logout.php">Logout</a><br>
-<input style="margin-top:3%" type="button" onclick="location.href='add_campaign.php';" value="Add Campaign" />
+<a href="logout.php">Logout</a>
 
-<h2 style="text-align:center;margin-top:4%">List Of Campaigns</h2>
-<table style="margin-top:3%" id="example" class="mdl-data-table" cellspacing="0" width="100%">
+
+<div style="z-index:2000;position:absolute;margin-left:45%;margin-top:11%" onclick="location.href='add_campaign.php';">
+<img style="height:150px;" src="images/add.png"></img>
+<h3>Add Campaign</h3>
+</div>
+
+<div style="margin-top:3%">
+<?php for($x=0;$x<count($arr_get_campaigns);$x++) {?>
+<div class="row" style="text-align:center">
+    <div class="col-sm-6" onclick="window.location.href='details.php?pk=<?php echo $arr_get_campaigns[$x]['campaign_detail']['pk'];?>'">
+      <img style="height:150px" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img>
+      <h3><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></h3>
+    </div>
+    <?php $x++; ?>
+    <div class="col-sm-6" onclick="window.location.href='details.php?pk=<?php echo $arr_get_campaigns[$x]['campaign_detail']['pk'];?>'">
+      <img style="height:150px" src="<?php echo $arr_get_campaigns[$x]['image_url']; ?>"></img>
+      <h3><?php echo $arr_get_campaigns[$x]['campaign_detail']['item']; ?></h3>
+    </div>
+  </div>
+<?php }?>
+</div>
+
+
+<!-- <h2 style="text-align:center;margin-top:4%">List Of Campaigns</h2> -->
+<!-- <table style="margin-top:3%" id="example" class="mdl-data-table" cellspacing="0" width="100%">
   <thead>
     <tr>
         <th>IMAGE</th>
@@ -119,7 +149,7 @@ print_r($arr_split);*/
       </tr>
     <?php }?>
   </tbody>
-</table> 
+</table>  -->
 
 
   </body>

@@ -93,14 +93,15 @@ if(isset($_POST['submit'])){
 
    $url = 'https://suffalproject.herokuapp.com/campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
    $data = array(
-              'name' => $_POST['name'],
+              'name' => '',
               'description' => '',
               'item' => $_POST['item'],
-              'price' => $_POST['price'],
+              'actual_price' => $_POST['actual_price'],
+              'offer_price' => $_POST['offer_price'],
               'no_of_people' => $_POST['number_of_ppl'],
               'image_id' => $image_id,
-              'start_date' => $_POST['start_date'],
-              'duration' => $_POST['duration']
+              'start_date' => '',
+              'duration' => ''
             );
 
     $options = array(
@@ -141,16 +142,33 @@ if(isset($_POST['submit'])){
 ?>
 
 
-<a href="home.php">Back</a><br>
-<h2 style="margin-top:3%;margin-left:3%">Add Campaign</h2>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+<button onclick="goBack()">Back</button>
+<h2 style="margin-top:3%;margin-left:3%;text-align:center">New Campagne</h2>
 
-  <form  action="#" enctype="multipart/form-data" style="margin-top:1%;margin-left:3%" method="post">
+  <form  action="#" enctype="multipart/form-data" style="margin-top:1%;margin-left:25%" method="post">
       
-    <label>Name</label><br>
+    <!-- <label>Name</label><br>
     <input type="text" id="name" name="name" required/>
-    <br><br>
+    <br><br> -->
+    <label>Product</label><br>
+    <input type="text" id="item" name="item" required/>
+    <br>
+    <label>Product Price</label><br>
+    <input type="text" id="actual_price" name="actual_price" required/>
+    <br>
+    <label>Offer Price</label><br>
+    <input type="text" id="offer_price" name="offer_price" required/>
+    <br>
+    <label>Number Of members per product</label><br>
+    <input type="text" id="number_of_ppl" name="number_of_ppl" required/>
+    <br>
 
-    <label>Description</label><br>
+    <label>Product description</label><br>
       <div class="present_fields_1">
           <input type="text" name="key[]" placeholder="key"/><input type="text" name="value[]" placeholder="value"/>
           <div class="input_fields" style="color:black"><br>
@@ -160,35 +178,29 @@ if(isset($_POST['submit'])){
     
     <br><br>
 
-    <label>Item</label><br>
-    <input type="text" id="item" name="item" required/>
-    <br><br>
+    
 
-    <label>Price</label><br>
-    <input type="text" id="price" name="price" required/>
-    <br><br>
-
-    <label>Number Of People</label><br>
-    <input type="text" id="number_of_ppl" name="number_of_ppl" required/>
-    <br><br>
-
-    <label>Start Date</label><br>
+    <!-- <label>Start Date</label><br>
     <input type="text" id="start_date" name="start_date" placeholder="dd/mm/yyyy" required/>
     <br><br>
 
     <label>Duration</label><br>
     <input type="text" id="duration" name="duration" required>
-    <br><br>
+    <br><br> -->
 
-    <label>Image</label><br>
-    <input type="file" id="image" name="image">
-    <br><br>
+    <div style="margin-left:40%;margin-top:-30%">
+    <img src="images/add_image.png" style="height:80px"></img>
+    <input type="file" id="image" name="image"></input>
+    <label style="margin-top:1%">Add Image</label>
+    </div>
 
 
       <!-- Accent-colored raised button with ripple -->
-  <button name="submit" id="submit" style="background-color: #5cb85c;width:7em;margin-top:0%" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-    Save
+  <div>
+  <button name="submit" id="submit" style="margin-top:20%;margin-left:25%" class="btn-primary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+    Launch Campagne
   </button>
+  </div>
 
 <!--      <button style="background-color:#d9534f" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
     Delete
