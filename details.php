@@ -73,12 +73,8 @@ session_start();
 
 <h3 style="text-align:center;margin-top:4%"><?php echo $arr_get_campaigns[0]['campaign_detail']['name']; ?></h3>
 
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
-<button onclick="goBack()">Back</button>
+
+<button onclick="window.location.href='home.php'">Back</button>
 
 
 
@@ -125,11 +121,22 @@ function goBack() {
        </div>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-3" onclick="window.location.href='order_to_process.php?pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
      <p style="font-weight:bold;font-size:20px">Order To Process</p>
      <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-      <h5><?php echo "<br><br>"; echo $arr_get_campaigns[0]['campaign_detail']['created']; ?></h5>
+      <h5><?php echo "<br>"; echo $arr_get_campaigns[0]['campaign_detail']['created']; ?></h5>
+      <h5><?php echo $arr_get_campaigns[0]['order_in_process']; ?></h5>
       <h5>Click for List</h5>
+       </div>
+    </div>
+
+    <div class="col-sm-3" onclick="window.location.href='order_to_process.php?pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
+    </div>
+
+    <div class="col-sm-3" onclick="window.location.href='edit_campagne.php?pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
+     <p style="font-weight:bold;font-size:20px;visibility:hidden">Campagne Settings</p>
+     <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
+      <h3><br>Campagne <br>Settings</h3>
        </div>
     </div>
 

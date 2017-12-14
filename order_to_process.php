@@ -39,6 +39,30 @@ tbody {
   </head>
   <body>
 
+
+<?php
+if(isset($_POST['status_btn'])){
+  /*echo "hi";*/
+  $url_status = 'https://suffalproject.herokuapp.com/update_status/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+  $options_status = array(
+    'http' => array(
+      'header'  => array(
+                  'STATUS: Confirmed',
+                  'CAMPAIGN-ID: '.$_GET['pk'],
+                  'USER-ID: '.$_POST['pk_confirm']
+                ),
+      'method'  => 'GET',
+    ),
+  );
+  $context_status = stream_context_create($options_status);
+  $output_status = file_get_contents($url_status, false,$context_status);
+  /*echo $output_get_ppl_in_campaign;*/
+  $arr_status = json_decode($output_status,true);
+ /* echo $arr_get_ppl_in_campaign[0]['user_data'][0]['user_data']['name'];
+  echo $arr_get_ppl_in_campaign[0]['campaign_data']['name'];*/
+}
+?>
+
 <?php
 
   $url_get_ppl_in_campaign = 'https://suffalproject.herokuapp.com/get_all_ppl_in_a_campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
@@ -46,7 +70,7 @@ tbody {
     'http' => array(
       'header'  => array(
                   'PK: '.$_GET['pk'],
-                  'FILTER: '.$_GET['filter']
+                  'FILTER: order_to_process'
                 ),
       'method'  => 'GET',
     ),
@@ -61,6 +85,7 @@ tbody {
 ?>
 
 
+
 <button onclick="window.location.href='details.php?pk=<?php echo $_GET['pk'];?>'">Back</button>
 
 <!-- <h3>Number of people joined : <?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_joined']; ?></h3>
@@ -69,21 +94,8 @@ tbody {
 
 <h2 style="text-align:center;margin-top:4%"><?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['name']; ?></h2>
 
-<?php
 
-if($_GET['filter'] == "total"){
-  $head1="Total Participants";
-}elseif($_GET['filter'] == "beneficiary"){
-  $head1="Total Beneficiary";
-}elseif($_GET['filter'] == "cancelled"){
-  $head1="Cancellation";
-}elseif($_GET['filter'] == "transferred"){
-  $head1="Transfers";
-}
-
-?>
-
-<h4 style="text-align:center;"><?php echo $head1;echo " "; echo $arr_get_ppl_in_campaign[0]['total_number']; ?></h4>
+<h4 style="text-align:center;"><?php echo "Order to Process";echo " "; echo $arr_get_ppl_in_campaign[0]['total_number']; ?></h4>
 
 <table style="margin-top:3%" id="example" class="mdl-data-table" cellspacing="0" width="100%">
   <thead>
@@ -95,6 +107,7 @@ if($_GET['filter'] == "total"){
         <th>Email</th>
         <th>DOJ</th>
         <th>Details</th>
+        <th>Delivery Confirmation</th>
     </tr>
   </thead>
 
@@ -124,7 +137,16 @@ $var=strstr($variable, 'TO', true);
             <button type="submit">Details</button>
             </form>
         </td>
-        
+        <td>
+         <?php if($arr_get_ppl_in_campaign[0]['user_data'][$x]['status'] == "Qualified") { ?>
+          <form method="post" action="order_to_process.php?pk=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>">
+            <input value="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>" type="hidden" name="pk_confirm"></input>
+            <button name="status_btn" type="submit">Delivered</button>
+            </form>
+         <?php } else { ?>
+          <p>Confirmed</p>
+         <?php } ?>
+        </td>
       </tr>
     <?php }?>
   </tbody>

@@ -22,6 +22,7 @@ if($_SESSION['login_suffal_app'] == 1){
   </head>
   <body>
 
+
 <?php
 
 session_start();
@@ -90,9 +91,11 @@ if(isset($_POST['submit'])){
           }
    
    
-
-   $url = 'https://suffalproject.herokuapp.com/campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+   
+   $_SESSION['pk_key_edit']= $_POST['pk_value'];
+   $url = 'https://suffalproject.herokuapp.com/edit_campaign/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
    $data = array(
+              'pk_value' => $_POST['pk_value'],
               'name' => $_POST['name'],
               'description' => '',
               'item' => '',
@@ -106,39 +109,60 @@ if(isset($_POST['submit'])){
 
     $options = array(
       'http' => array(
-        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'header'  => "Content-Type: application/json\r\n" .
+                       "Accept: application/json\r\n",
         'method'  => 'POST',
-        'content' => http_build_query($data),
+        'content' => json_encode( $data ),
       ),
     );
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     
     $arr = json_decode($result,true);
-    $_SESSION['pk_key']= $arr['pk'];
-
 
     for ($k=0;$k<count($_POST['key']);$k++){
-      $url_key = 'https://suffalproject.herokuapp.com/description/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+      $url_key = 'https://suffalproject.herokuapp.com/edit_description/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
       $data_key = array(
-              'campaign_id' => $_SESSION['pk_key'],
+              'campaign_id' => $_SESSION['pk_key_edit'],
+              'desc_pk' => $_POST['desc_pk'][$k],
               'key' => $_POST['key'][$k],
               'value' => $_POST['value'][$k]
             );
 
       $options_key = array(
         'http' => array(
-          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'header'  => "Content-Type: application/json\r\n" .
+                       "Accept: application/json\r\n",
           'method'  => 'POST',
-          'content' => http_build_query($data_key),
+          'content' => json_encode( $data_key ),
         ),
       );
       $context_key  = stream_context_create($options_key);
       $result_key = file_get_contents($url_key, false, $context_key);
     }
 
-    echo "<script type='text/javascript'>alert('New Campaign Added')</script>";
+    echo "<script type='text/javascript'>alert('Campaign Updated')</script>";
 }
+?>
+
+<?php
+session_start();
+
+  $url_get_campaigns = 'https://suffalproject.herokuapp.com/web_get_campaign_detail/';
+  $options_get_campaigns = array(
+    'http' => array(
+      'header'  => array(
+                  'CAMPAIGN-ID: '.$_GET['pk']
+                ),
+      'method'  => 'GET',
+    ),
+  );
+  $context_get_campaigns = stream_context_create($options_get_campaigns);
+  $output_get_campaigns = file_get_contents($url_get_campaigns, false,$context_get_campaigns);
+  /*echo $output_get_campaigns;*/
+  $arr_get_campaigns = json_decode($output_get_campaigns,true);
+  /*echo $arr_get_ppl_in_campaign[0]['campaign_detail']['item'];*/
+  
 ?>
 
 
@@ -147,28 +171,32 @@ function goBack() {
     window.history.back();
 }
 </script>
-<button onclick="window.location.href='home.php'">Back</button>
-<h2 style="margin-top:3%;margin-left:3%;text-align:center">New Campagne</h2>
+<button onclick="window.location.href='details.php?pk=<?php echo $_GET['pk'];?>'">Back</button>
+<h2 style="margin-top:3%;margin-left:3%;text-align:center"><?php echo $arr_get_campaigns[0]['campaign_detail']['name']; ?></h2>
 
   <form  action="#" enctype="multipart/form-data" style="margin-top:1%;margin-left:25%" method="post">
-      
+    
+    <input type="hidden" id="pk_value" name="pk_value" value="<?php echo $arr_get_campaigns[0]['campaign_detail']['pk']; ?>" required/> 
     
     <label>Product</label><br>
-    <input type="text" id="name" name="name" required/>
+    <input type="text" id="name" name="name" value="<?php echo $arr_get_campaigns[0]['campaign_detail']['name']; ?>" required/>
     <br>
     <label>Product Price</label><br>
-    <input type="text" id="actual_price" name="actual_price" required/>
+    <input type="text" id="actual_price" name="actual_price" value="<?php echo $arr_get_campaigns[0]['campaign_detail']['actual_price']; ?>" required/>
     <br>
     <label>Offer Price</label><br>
-    <input type="text" id="offer_price" name="offer_price" required/>
+    <input type="text" id="offer_price" name="offer_price" value="<?php echo $arr_get_campaigns[0]['campaign_detail']['offer_price']; ?>" required/>
     <br>
     <label>Number Of members per product</label><br>
-    <input type="text" id="number_of_ppl" name="number_of_ppl" required/>
+    <input type="text" id="number_of_ppl" name="number_of_ppl" value="<?php echo $arr_get_campaigns[0]['campaign_detail']['no_of_people']; ?>" required/>
     <br>
 
     <label>Product description</label><br>
       <div class="present_fields_1">
-          <input type="text" name="key[]" placeholder="key"/><input type="text" name="value[]" placeholder="value"/>
+         <?php for($j=0;$j<count($arr_get_campaigns[0]['description']);$j++) {?>
+         <input type="hidden" name="desc_pk[]" value="<?php echo $arr_get_campaigns[0]['description'][$j]['pk']; ?>"/>
+         <input type="text" name="key[]" placeholder="key" value="<?php echo $arr_get_campaigns[0]['description'][$j]['key']; ?>"/><input type="text" name="value[]" value="<?php echo $arr_get_campaigns[0]['description'][$j]['value']; ?>" placeholder="value"/><br>
+         <?php } ?>
           <div class="input_fields" style="color:black"><br>
            <button type="button" class="add_field btn ">Add More</button>
           </div>
@@ -187,16 +215,20 @@ function goBack() {
     <br><br> -->
 
     <div style="margin-left:40%;margin-top:-30%">
-    <img src="images/add_image.png" style="height:80px"></img>
+    <img src="<?php echo $arr_get_campaigns[0]['image_url']['image_url'] ?>" style="height:80px"></img>
     <input type="file" id="image" name="image"></input>
-    <label style="margin-top:1%">Add Image</label>
+    <label style="margin-top:1%">Change Image</label>
     </div>
 
 
       <!-- Accent-colored raised button with ripple -->
   <div>
-  <button name="submit" id="submit" style="margin-top:20%;margin-left:25%" class="btn-primary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-    Launch Campagne
+  <button onclick="window.location.href='details.php?pk=<?php echo $_GET['pk'];?>'" type="button" style="margin-top:20%;margin-left:5%" class="btn-primary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+    Close
+  </button>
+
+  <button name="submit" id="submit" style="margin-top:20%;margin-left:5%" class="btn-primary mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+    Edit Campagne
   </button>
   </div>
 
@@ -220,7 +252,7 @@ $(document).ready(function() {
 
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $('<div><input type="text" name="key[]" placeholder="key"/><input type="text" name="value[]" placeholder="value"/><a href="#" class="remove_field">Remove</a></div><br>').insertBefore(add_button)//add input box\
+            $('<div><input type="hidden" name="desc_pk[]" value="new"/><input type="text" name="key[]" placeholder="key"/><input type="text" name="value[]" placeholder="value"/><a href="#" class="remove_field">Remove</a></div><br>').insertBefore(add_button)//add input box\
           
 
       }
