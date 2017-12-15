@@ -119,7 +119,7 @@ $var=strstr($variable, 'TO', true);
         <!-- <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['pan_details']; ?>" download>Pan Card</td>
         <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['aadhar_card_details']; ?>" download>Aadhar Card</td> -->
         <td>
-          <form method="post" action="user_detail.php?cid=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>&user_id=<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>">
+          <form method="post" action="user_detail.php?filter=<?php echo $_GET['filter']; ?>&cid=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>&user_id=<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>">
 
             <button type="submit">Details</button>
             </form>
