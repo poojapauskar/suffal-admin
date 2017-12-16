@@ -33,6 +33,7 @@ if($_SESSION['login_suffal_app'] == 1){
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="autocomplete-Files/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
 
@@ -298,8 +299,12 @@ if(isset($_POST['delete_btn'])){
 
 <div style="margin-left:60%;margin-top:-12%">
     <img src="<?php echo $arr_get_campaign_user_detail[0]['image_url']['profile']; ?>" style="height:80px"></img><br><br>
-    <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>" download>VIEW PAN</a></button><br>
-    <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar']; ?>" download>VIEW AADHAR</a></button>
+    
+    <button type="button" data-toggle="modal" data-target="#myModal1">VIEW PAN</button>
+    <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>" download>DOWNLOAD PAN</a></button><br><br>
+    
+    <button type="button" data-toggle="modal" data-target="#myModal2">VIEW AADHAR</button>
+    <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar']; ?>" download>DOWNLOAD AADHAR</a></button>
     <!-- <button type="button" onclick="window.location.href='<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>'">VIEW PAN</button><br><br>
     <button type="button" onclick="window.location.href='<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar'] ?>'">VIEW AADHAR</button> -->
     <br><br>
@@ -323,6 +328,57 @@ if(isset($_POST['delete_btn'])){
 <input type="hidden" name="pk_delete" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pk']; ?>"></input>
 <button style="margin-left:10%;margin-top:-2%" type="submit" name="delete_btn">Delete</button>
 </form>
+
+
+
+
+ <div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="text-align:center">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">PAN CARD</h4>
+        </div>
+        <div class="modal-body">
+          <img src="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>"></img>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="text-align:center">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">AADHAR CARD</h4>
+        </div>
+        <div class="modal-body">
+          <img src="<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar']; ?>"></img>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 
 
 <script type="text/javascript">
