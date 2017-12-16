@@ -298,7 +298,12 @@ if(isset($_POST['delete_btn'])){
 </div> 
 
 <div style="margin-left:60%;margin-top:-12%">
-    <img src="<?php echo $arr_get_campaign_user_detail[0]['image_url']['profile']; ?>" style="height:80px"></img><br><br>
+  <?php if($arr_get_campaign_user_detail[0]['image_url']['profile'] == "") { 
+     $img_src="images/no-image.png";
+   }else{
+     $img_src=$arr_get_campaign_user_detail[0]['image_url']['profile'];
+   } ?>
+    <img src="<?php echo $img_src; ?>" style="height:80px"></img><br><br>
     
     <button type="button" data-toggle="modal" data-target="#myModal1">VIEW PAN</button>
     <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>" download>DOWNLOAD PAN</a></button><br><br>
