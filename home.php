@@ -14,11 +14,21 @@ if($_SESSION['login_suffal_app'] == 1){
   <head>
 
   <title>Home</title>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <script src="js/material.min.js"></script>
+  <link rel="stylesheet" href="css/material.indigo-pink.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <style type="text/css">
   thead,td,th{
@@ -47,7 +57,7 @@ tbody {
 
   </head>
 
-<body >
+<body style="overflow-x:hidden">
 
 
 
@@ -68,14 +78,22 @@ session_start();
   
 ?>
 
-<h5 style="text-align:center">Admin Portal</h5>
+<div style="text-align:center">
+<legend style="margin-top:3%;text-align:center">Admin Console</legend>
+<div style="text-align:right;margin-right:3%;margin-top:-3%">
+<b>Welcome User, </b><a style="color:red;margin-left:2%" href="logout.php">Logout</a>
+</div>
+</div>
 
-<a href="logout.php">Logout</a>
 
 
-<div style="z-index:2000;position:absolute;margin-left:45%;margin-top:11%" onclick="location.href='add_campaign.php';">
-<img style="height:150px;" src="images/add.png"></img>
-<h3>Add Campaign</h3>
+
+<div style="z-index:2000;position:absolute;margin-left:44%;margin-top:11%" onclick="location.href='add_campaign.php';">
+<!-- <img style="height:150px;" src="images/add.png"></img> -->
+<button style="height:150px;width:150px;border-radius:50%" class="mdl-button mdl-js-button mdl-button--raised">
+    +
+  </button>
+<h5 style="margin-left:2%">Add Campagne</h5>
 </div>
 
 <div style="margin-top:3%">

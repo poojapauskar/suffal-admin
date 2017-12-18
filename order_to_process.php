@@ -42,8 +42,8 @@ tbody {
 
 <?php
 if(isset($_POST['status_btn'])){
-  /*echo "hi";*/
-  $url_status = 'https://suffalproject.herokuapp.com/update_status/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+  
+  /*$url_status = 'https://suffalproject.herokuapp.com/update_status/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
   $options_status = array(
     'http' => array(
       'header'  => array(
@@ -56,10 +56,7 @@ if(isset($_POST['status_btn'])){
   );
   $context_status = stream_context_create($options_status);
   $output_status = file_get_contents($url_status, false,$context_status);
-  /*echo $output_get_ppl_in_campaign;*/
-  $arr_status = json_decode($output_status,true);
- /* echo $arr_get_ppl_in_campaign[0]['user_data'][0]['user_data']['name'];
-  echo $arr_get_ppl_in_campaign[0]['campaign_data']['name'];*/
+  $arr_status = json_decode($output_status,true);*/
 }
 ?>
 
@@ -144,7 +141,7 @@ $var=strstr($variable, 'TO', true);
             <button name="status_btn" type="submit">Delivered</button>
             </form>
          <?php } else { ?>
-          <p>Confirmed</p>
+          <p>Completed</p>
          <?php } ?>
         </td>
       </tr>

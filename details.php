@@ -54,7 +54,7 @@ tbody {
 <?php
 session_start();
 
-  $url_get_campaigns = 'https://suffalproject.herokuapp.com/web_get_campaign_detail/';
+  $url_get_campaigns = 'https://suffalproject.herokuapp.com/get_all_counts/';
   $options_get_campaigns = array(
     'http' => array(
       'header'  => array(
