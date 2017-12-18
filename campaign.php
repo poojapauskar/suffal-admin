@@ -94,6 +94,7 @@ if($_GET['filter'] == "total"){
         <th>Mobile</th>
         <th>Email</th>
         <th>DOJ</th>
+        <th>Status</th>
         <th>Details</th>
     </tr>
   </thead>
@@ -116,6 +117,7 @@ $var=strstr($variable, 'TO', true);
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['mobile']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['email']; ?></td>
         <td><?php echo $variable; ?></td>
+        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['status']; ?></td>
         <!-- <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['pan_details']; ?>" download>Pan Card</td>
         <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['aadhar_card_details']; ?>" download>Aadhar Card</td> -->
         <td>
