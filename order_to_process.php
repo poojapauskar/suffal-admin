@@ -102,6 +102,8 @@ if(isset($_POST['status_btn'])){
         <th>Mobile</th>
         <th>Email</th>
         <th>DOJ</th>
+        <th>Qualify Code</th>
+        <th>Verify Code</th>
         <th>Details</th>
         <th>Delivery Confirmation</th>
     </tr>
@@ -125,6 +127,8 @@ $var=strstr($variable, 'TO', true);
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['mobile']; ?></td>
         <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['email']; ?></td>
         <td><?php echo $variable; ?></td>
+        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['qualify_code']; ?></td>
+        <td><?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['verify_code']; ?></td>
         <!-- <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['pan_details']; ?>" download>Pan Card</td>
         <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['aadhar_card_details']; ?>" download>Aadhar Card</td> -->
         <td>
