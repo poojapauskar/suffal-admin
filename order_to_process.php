@@ -43,11 +43,10 @@ tbody {
 <?php
 if(isset($_POST['status_btn'])){
   
-  /*$url_status = 'https://suffalproject.herokuapp.com/update_status/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
+  $url_status = 'https://suffalproject.herokuapp.com/change_delivery_status/?access_token=6L0twxGEfgGNXE0wnRaJIzRk4KkfVF';
   $options_status = array(
     'http' => array(
       'header'  => array(
-                  'STATUS: Confirmed',
                   'CAMPAIGN-ID: '.$_GET['pk'],
                   'USER-ID: '.$_POST['pk_confirm']
                 ),
@@ -56,7 +55,7 @@ if(isset($_POST['status_btn'])){
   );
   $context_status = stream_context_create($options_status);
   $output_status = file_get_contents($url_status, false,$context_status);
-  $arr_status = json_decode($output_status,true);*/
+  $arr_status = json_decode($output_status,true);
 }
 ?>
 
@@ -135,13 +134,13 @@ $var=strstr($variable, 'TO', true);
             </form>
         </td>
         <td>
-         <?php if($arr_get_ppl_in_campaign[0]['user_data'][$x]['status'] == "Qualified") { ?>
+         <?php if($arr_get_ppl_in_campaign[0]['user_data'][$x]['delivered'] == "No") { ?>
           <form method="post" action="order_to_process.php?pk=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>">
             <input value="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>" type="hidden" name="pk_confirm"></input>
             <button name="status_btn" type="submit">Delivered</button>
             </form>
          <?php } else { ?>
-          <p>Completed</p>
+          <p>Done</p>
          <?php } ?>
         </td>
       </tr>
