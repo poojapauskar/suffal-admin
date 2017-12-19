@@ -13,6 +13,9 @@ if($_SESSION['login_suffal_app'] == 1){
 <html lang="en">
   <head>
 
+<script type="text/javascript" src="js/require.js"></script>
+ <script src="js/ajax.js"></script>
+
   <title>Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,9 +52,7 @@ tbody {
 
 <body >
 
-
-
-<?php
+<?php 
 session_start();
 
   $url_get_campaigns = 'https://suffalproject.herokuapp.com/get_all_counts/';
@@ -68,8 +69,9 @@ session_start();
   /*echo $output_get_campaigns;*/
   $arr_get_campaigns = json_decode($output_get_campaigns,true);
   /*echo $arr_get_ppl_in_campaign[0]['campaign_detail']['item'];*/
-  
 ?>
+
+
 
 <h3 style="text-align:center;margin-top:4%"><?php echo $arr_get_campaigns[0]['campaign_detail']['name']; ?></h3>
 
@@ -81,32 +83,32 @@ session_start();
 <div class="row" style="text-align:center;margin-top:4%">
     <div class="col-sm-3" onclick="window.location.href='campaign.php?filter=total&pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
        <p style="font-weight:bold;font-size:20px">Total Participants</p>
-       <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-        <h3><?php echo "<br>"; echo $arr_get_campaigns[0]['total_number']; ?></h3>
+       <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%"><br>
+        <h3 id="total"><?php echo $arr_get_campaigns[0]['total_number']; ?></h3>
         <h5>Click for List</h5>
        </div>
     </div>
 
     <div class="col-sm-3" onclick="window.location.href='campaign.php?filter=beneficiary&pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
        <p style="font-weight:bold;font-size:20px">Total Beneficiary</p>
-       <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-        <h3><?php echo "<br>"; echo $arr_get_campaigns[0]['no_of_ppl_qualified']; ?></h3>
+       <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%"><br>
+        <h3 id="ben"><?php echo $arr_get_campaigns[0]['no_of_ppl_qualified']; ?></h3>
         <h5>Click for List</h5>
        </div>
     </div>
 
     <div class="col-sm-3" onclick="window.location.href='campaign.php?filter=cancelled&pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
       <p style="font-weight:bold;font-size:20px">Cancellation</p>
-      <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-       <h3><?php echo "<br>"; echo $arr_get_campaigns[0]['no_of_ppl_cancelled']; ?></h3>
+      <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%"><br>
+       <h3 id="can"><?php echo $arr_get_campaigns[0]['no_of_ppl_cancelled']; ?></h3>
        <h5>Click for List</h5>
       </div>
     </div>
 
     <div class="col-sm-3" onclick="window.location.href='campaign.php?filter=transferred&pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
       <p style="font-weight:bold;font-size:20px">Transfers</p>
-      <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-       <h3><?php echo "<br>"; echo $arr_get_campaigns[0]['no_of_ppl_transferred']; ?></h3>
+      <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%"><br>
+       <h3 id="trans"><?php echo $arr_get_campaigns[0]['no_of_ppl_transferred']; ?></h3>
        <h5>Click for List</h5>
       </div>
     </div>
@@ -116,16 +118,16 @@ session_start();
 <div class="row" style="text-align:center;margin-top:3%">
     <div class="col-sm-3">
      <p style="font-weight:bold;font-size:20px">Total Amount</p>
-     <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-      <h3><?php echo "<br>"; echo $arr_get_campaigns[0]['campaign_detail']['offer_price']; ?></h3>
+     <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%"><br>
+      <h3><?php echo $arr_get_campaigns[0]['campaign_detail']['offer_price']; ?></h3>
        </div>
     </div>
 
     <div class="col-sm-3" onclick="window.location.href='order_to_process.php?pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
      <p style="font-weight:bold;font-size:20px">Order To Process</p>
-     <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
-      <h5><?php echo "<br>"; echo $arr_get_campaigns[0]['campaign_detail']['created']; ?></h5>
-      <h5><?php echo $arr_get_campaigns[0]['order_in_process']; ?></h5>
+     <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%"><br>
+      <h5><?php echo $arr_get_campaigns[0]['campaign_detail']['created']; ?></h5>
+      <h5 id="otp"><?php echo $arr_get_campaigns[0]['order_in_process']; ?></h5>
       <h5>Click for List</h5>
        </div>
     </div>
@@ -135,7 +137,7 @@ session_start();
 
     <div class="col-sm-3" onclick="window.location.href='edit_campagne.php?pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
      <p style="font-weight:bold;font-size:20px;visibility:hidden">Campagne Settings</p>
-     <div style="width:250px;height:100px;background-color:#D8D8D8;margin-left:10%">
+     <div style="width:250px;height:130px;background-color:#D8D8D8;margin-left:10%">
       <h3><br>Campagne <br>Settings</h3>
        </div>
     </div>
@@ -146,6 +148,37 @@ session_start();
 </div>
 
 
+<script type="text/javascript">
+window.setInterval(function(){
+  var Url="count.php";
+  /*alert("<?php echo $_GET['pk'];  ?>");*/
+  $.ajax({
+  type: "POST",
+  url: Url,
+  dataType: 'json',
+  data: {cid:"<?php echo $_GET['pk']; ?>",session:1},
+  success: function(fields){
+    $.each(fields, function(idx, f){
+      /*alert(f.status);*/
+      /*alert(f.total);
+      alert(f.ben);
+      alert(f.can);
+      alert(f.trans);
+      alert(f.otp);*/
+      $('#total').text(f.total);
+      $('#ben').text(f.ben);
+      $('#can').text(f.can);
+      $('#trans').text(f.trans);
+      $('#otp').text(f.otp);
+      /*if(f.status==400){
+        document.location.href='session_exp.php';
+      }*/
+    });
+  }
+});
+
+}, 60000);
+</script>
 
   </body>
 </html>

@@ -191,6 +191,8 @@ if(isset($_POST['submit'])){
               'pan_no' => $_POST['edit_pan_no'],
               'dob' => $_POST['edit_dob'],
               'email' => $_POST['edit_email'],
+              'city' => $_POST['edit_city'],
+              'state' => $_POST['edit_state'],
               'pan' => $image_pan,
               'aadhar' => $image_aadhar,
               'image_id' => $image_id,
@@ -285,6 +287,12 @@ if(isset($_POST['delete_btn'])){
     <br>
     <label>Email :</label>
     <input type="text" class="edit1 bord1 bord" name="edit_email" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['email']; ?>" readonly></input>
+    <br>
+    <label>City :</label>
+    <input type="text" class="edit1 bord1 bord" name="edit_city" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['city']; ?>" readonly></input>
+    <br>
+    <label>State :</label>
+    <input type="text" class="edit1 bord1 bord" name="edit_state" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['state']; ?>" readonly></input>
     <br>
     <label>Date of Birth :</label>
     <input type="text" class="edit1 bord1 bord" name="edit_dob" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['dob']; ?>" readonly></input>
