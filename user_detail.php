@@ -27,13 +27,21 @@ if($_SESSION['login_suffal_app'] == 1){
 </style>
    <title></title>
 
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- <link rel="stylesheet" type="text/css" href="css/material.indigo-pink.min.css"> -->
- <meta name="viewport" content="width=device-width, arinitial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="autocomplete-Files/styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <script src="js/material.min.js"></script>
+  <link rel="stylesheet" href="css/material.indigo-pink.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   </head>
   <body>
 
@@ -256,56 +264,115 @@ if(isset($_POST['delete_btn'])){
 ?>
 
 
-<button name="back_btn" id="back_btn" onclick="window.location.href='campaign.php?pk=<?php echo $_GET['cid'];?>&filter=<?php echo $_GET['filter'];?>'">Back</button>
 
-<h2 style="margin-top:3%;text-align:center"><?php echo $arr_get_campaign_user_detail[0]['campaign_data']['name']; ?></h2>
+<legend style="margin-top:4%;text-align:center"><?php echo $arr_get_campaign_user_detail[0]['campaign_data']['name']; ?></legend>
 
-<div style="margin-left:17%;margin-top:4%">
+<div style="text-align:right;margin-right:3%;margin-top:-5%">
+<button class="mdl-button mdl-js-button mdl-button--raised" name="back_btn" id="back_btn" onclick="window.location.href='campaign.php?pk=<?php echo $_GET['cid'];?>&filter=<?php echo $_GET['filter'];?>'">Back</button>
+</div>
+
+<div style="margin-left:17%;margin-top:2%">
 <form method="post" enctype="multipart/form-data" action="user_detail.php?filter=<?php echo $_GET['filter']; ?>&user_id=<?php echo $_GET['user_id']; ?>&cid=<?php echo $_GET['cid']; ?>">
     <input type="hidden" name="campaign_id" value="<?php echo $arr_get_campaign_user_detail[0]['campaign_data']['pk']; ?>"></input>
     <input type="hidden" name="pk_value" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pk']; ?>"></input>
-    <label>First Name :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_firstname" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['firstname']; ?>" readonly></input>
-    <br>
-    <label>Last Name :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_lastname" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['lastname']; ?>" readonly></input>
-    <br>
-    <label>Pincode :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_pincode" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pincode']; ?>" readonly></input>
-    <br>
-    <label>Aadhar No. :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_aadhar_no" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['aadhar_no']; ?>" readonly></input>
-    <br>
-    <label>Pan No. :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_pan_no" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pan_no']; ?>" readonly></input>
-    <br>
-    <label>Unique Id :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_uid" value="<?php echo $arr_get_campaign_user_detail[0]['uid']; ?>" readonly></input>
-    <br>
-    <label>Mobile :</label>
-    <input type="text" class="bord1" name="edit_mobile" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['mobile']; ?>" readonly></input>
-    <br>
-    <label>Email :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_email" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['email']; ?>" readonly></input>
-    <br>
-    <label>City :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_city" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['city']; ?>" readonly></input>
-    <br>
-    <label>State :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_state" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['state']; ?>" readonly></input>
-    <br>
-    <label>Date of Birth :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_dob" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['dob']; ?>" readonly></input>
-    <br>
-    <label>Date of Joining :</label>
-    <input type="text" class="bord1" name="edit_doj" value="<?php echo $arr_get_campaign_user_detail[0]['date_of_joining']; ?>" readonly></input>
-    <br>
-    <label>Address :</label>
-    <input type="text" class="edit1 bord1 bord" name="edit_address" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['address']; ?>" readonly></input>
-    <br>
-</div> 
+ 
+<div class="row">
+<div class="col-sm-3">   
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_firstname" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['firstname']; ?>" readonly></input>
+    <label class="mdl-textfield__label">First Name</label>
+    </div>
 
-<div style="margin-left:60%;margin-top:-12%">
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_lastname" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['lastname']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Last Name</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_pincode" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pincode']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Pincode</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_aadhar_no" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['aadhar_no']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Aadhar No.</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_pan_no" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pan_no']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Pan No.</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_uid" value="<?php echo $arr_get_campaign_user_detail[0]['uid']; ?>" readonly></input>
+    <label class="mdl-textfield__label">UID</label>
+    </div>
+
+    <br>
+    
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="bord1 mdl-textfield__input" style="width:60%" name="edit_mobile" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['mobile']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Mobile</label>
+    </div>
+
+    <br>
+</div>
+<div class="col-sm-3">  
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_email" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['email']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Email</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_city" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['city']; ?>" readonly></input>
+    <label class="mdl-textfield__label">City</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_state" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['state']; ?>" readonly></input>
+    <label class="mdl-textfield__label">State</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_dob" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['dob']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Date of Birth</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="bord1 mdl-textfield__input" style="width:60%" name="edit_doj" value="<?php echo $arr_get_campaign_user_detail[0]['date_of_joining']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Date of Joining</label>
+    </div>
+
+    <br>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="text" class="edit1 bord1 bord mdl-textfield__input" style="width:60%" name="edit_address" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['address']; ?>" readonly></input>
+    <label class="mdl-textfield__label">Address</label>
+    </div>
+
+    <br>
+</div>
+
+<div class="col-sm-3">  
+<div style="margin-left:35%;margin-top:5%">
   <?php if($arr_get_campaign_user_detail[0]['image_url']['profile'] == "") { 
      $img_src="images/no-image.png";
    }else{
@@ -313,34 +380,44 @@ if(isset($_POST['delete_btn'])){
    } ?>
     <img src="<?php echo $img_src; ?>" style="height:80px"></img><br><br>
     
-    <button type="button" data-toggle="modal" data-target="#myModal1">VIEW PAN</button>
-    <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>" download>DOWNLOAD PAN</a></button><br><br>
+    <button class="mdl-button mdl-js-button mdl-button--raised" type="button" data-toggle="modal" data-target="#myModal1">VIEW PAN</button>
+    <button style="margin-left:70%;margin-top:-23%" class="mdl-button mdl-js-button mdl-button--raised" type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>" download>DOWNLOAD PAN</a></button><br><br>
     
-    <button type="button" data-toggle="modal" data-target="#myModal2">VIEW AADHAR</button>
-    <button type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar']; ?>" download>DOWNLOAD AADHAR</a></button>
+    <button class="mdl-button mdl-js-button mdl-button--raised" type="button" data-toggle="modal" data-target="#myModal2">VIEW AADHAR</button>
+    <button style="margin-left:89%;margin-top:-23%" class="mdl-button mdl-js-button mdl-button--raised" type="button"><a href="<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar']; ?>" download>DOWNLOAD AADHAR</a></button>
     <!-- <button type="button" onclick="window.location.href='<?php echo $arr_get_campaign_user_detail[0]['image_url']['pan']; ?>'">VIEW PAN</button><br><br>
     <button type="button" onclick="window.location.href='<?php echo $arr_get_campaign_user_detail[0]['image_url']['aadhar'] ?>'">VIEW AADHAR</button> -->
     <br><br>
-    <input class="hid1 hid" type="file" name="edit_profile"><b class="hid1 hid">Upload Profile Image</b></input><br><br>
-    <input class="hid1 hid" type="file" name="edit_pan"><b class="hid1 hid">Upload Pan</b></input><br><br>
-    <input class="hid1 hid" type="file"name="edit_aadhar"><b class="hid1 hid">Upload Aadhar</b></input><br><br>
+    <input class="hid1 hid mdl-textfield__input" type="file" name="edit_profile"><b style="font-weight:normal" class="hid1 hid">Upload Profile Image</b></input><br><br>
+    <input class="hid1 hid mdl-textfield__input" type="file" name="edit_pan"><b style="font-weight:normal" class="hid1 hid">Upload Pan</b></input><br><br>
+    <input class="hid1 hid mdl-textfield__input" type="file"name="edit_aadhar"><b style="font-weight:normal" class="hid1 hid">Upload Aadhar</b></input><br><br>
 </div> 
 
-<div style="margin-left:30%;margin-top:-10%">
-<button type="button" name="edit" class="edit">Edit</button>
-
-<button type="submit" name="submit" class="hid1 hid">Submit</button>
-<button type="button" name="cancel" class="hid1 hid cancel">Cancel</button>
+</div> 
 </div>
- 
+
+
+<div class="row">
+
+<div style="margin-left:20%;">
+<button type="button" name="edit" class="edit mdl-button mdl-js-button mdl-button--raised">Edit</button>
+
+<button type="submit" name="submit" class="hid1 hid mdl-button mdl-js-button mdl-button--raised">Submit</button>
+<button style="margin-left:1%" type="button" name="cancel" class="hid1 hid cancel mdl-button mdl-js-button mdl-button--raised">Cancel</button>
+</div>
+</div>
+
+</div>
+
 </form>
 
-
+<div class="row">
 <form method="post" action="user_detail.php?filter=<?php echo $_GET['filter']; ?>&user_id=<?php echo $_GET['user_id']; ?>&cid=<?php echo $_GET['cid']; ?>">
 <input type="hidden" name="campaign_id" value="<?php echo $arr_get_campaign_user_detail[0]['campaign_data']['pk']; ?>"></input>
 <input type="hidden" name="pk_delete" value="<?php echo $arr_get_campaign_user_detail[0]['user_data']['pk']; ?>"></input>
-<button style="margin-left:10%;margin-top:-2%" type="submit" name="delete_btn">Delete</button>
+<button class="mdl-button mdl-js-button mdl-button--raised" style="margin-left:55%;margin-top:-3.5%" type="submit" name="delete_btn">Delete</button>
 </form>
+</div>
 
 
 
@@ -398,14 +475,14 @@ if(isset($_POST['delete_btn'])){
   $( ".edit" ).click(function() {
        $('.hid').removeClass('hid1');
        $('.edit1').prop('readonly', false);
-       $('.bord').removeClass('bord1');
+       /*$('.bord').removeClass('bord1');*/
        $('.edit').addClass('hid1');
     });
 
   $( ".cancel" ).click(function() {
        $('.hid').addClass('hid1');
        $('.edit1').prop('readonly', true);
-       $('.bord').addClass('bord1');
+       /*$('.bord').addClass('bord1');*/
        $('.edit').removeClass('hid1');
     });
 </script>
