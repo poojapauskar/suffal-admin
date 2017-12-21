@@ -190,7 +190,7 @@ function goBack() {
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <div class="present_fields_1">
           <input style="width:42%" class="mdl-textfield__input" type="text" name="key[]" placeholder="key"></input><input style="width:42%;margin-left:50%;margin-top:-8%" class="mdl-textfield__input" type="text" name="value[]" placeholder="value"></input>
-          <div class="input_fields" style="color:black"><br>
+          <div class="input_fields" style="color:black;margin-top:-5%"><br>
            <button type="button" class="add_field btn mdl-button mdl-js-button mdl-button--raised">Add More</button>
           </div>
       </div>
@@ -217,7 +217,7 @@ function goBack() {
  <br><br>
       <!-- Accent-colored raised button with ripple -->
   <div>
-  <button class="mdl-button mdl-js-button mdl-button--raised" name="submit" id="submit">
+  <button style="margin-left:40%" class="mdl-button mdl-js-button mdl-button--raised" name="submit" id="submit">
     Launch Campagne
   </button>
   </div>
