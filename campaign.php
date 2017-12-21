@@ -100,7 +100,7 @@ if($_GET['filter'] == "total"){
 
 <h5 style="text-align:center;"><?php echo $head1;echo " ";?><b><?php echo $arr_get_ppl_in_campaign[0]['total_number']; ?></b></h5>
 
-<table style="margin-top:1%" id="example" class="table table-hover table-mc-light-blue"cellspacing="0" width="100%">
+<table style="margin-top:1%" id="example" class="table table-hover table-mc-light-blue" cellspacing="0" width="100%">
   <thead>
     <tr>
         <th>Sl. No.</th>

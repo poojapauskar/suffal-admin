@@ -268,7 +268,13 @@ if(isset($_POST['delete_btn'])){
 <legend style="margin-top:4%;text-align:center"><?php echo $arr_get_campaign_user_detail[0]['campaign_data']['name']; ?></legend>
 
 <div style="text-align:right;margin-right:3%;margin-top:-5%">
+
+<?php if($_GET['filter'] == "order_to_process"){ ?>
+<button class="mdl-button mdl-js-button mdl-button--raised" name="back_btn" id="back_btn" onclick="window.location.href='order_to_process.php?pk=<?php echo $_GET['cid'];?>&filter=<?php echo $_GET['filter'];?>'">Back</button>
+<?php }else{ ?>
 <button class="mdl-button mdl-js-button mdl-button--raised" name="back_btn" id="back_btn" onclick="window.location.href='campaign.php?pk=<?php echo $_GET['cid'];?>&filter=<?php echo $_GET['filter'];?>'">Back</button>
+<?php } ?>
+
 </div>
 
 <div style="margin-left:17%;margin-top:2%">

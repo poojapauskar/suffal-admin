@@ -138,7 +138,7 @@ session_start();
        </button>
     </div>
 
-    <div class="col-sm-3" onclick="window.location.href='order_to_process.php?pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
+    <div class="col-sm-3" onclick="window.location.href='order_to_process.php?filter=order_to_process&pk=<?php echo $arr_get_campaigns[0]['campaign_detail']['pk'];?>'">
      <p style="font-weight:bold;font-size:20px">Order To Process</p>
      <button  class="mdl-button mdl-js-button mdl-button--raised" style="width:250px;height:130px;margin-left:10%">
       <h5><?php echo $arr_get_campaigns[0]['campaign_detail']['created']; ?></h5>

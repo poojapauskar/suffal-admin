@@ -11,25 +11,39 @@ if($_SESSION['login_suffal_app'] == 1){
 ?>
 <html>
   <head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <script src="js/material.min.js"></script>
+  <link rel="stylesheet" href="css/material.indigo-pink.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
  <style type="text/css">
   thead,td,th{
-      border: 1px solid black ;
+      border: 1px solid #E0E0E0 ;
       
-  }
-    
-th, td {
+  } 
+/*th, td {
     width: 220px;
     text-align:left;
     padding:4px;
 }
 
 th{font-size: 18px}
-td{font-size: 15px}
+td{font-size: 15px}*/
 
 thead, tbody { display: table-header-group; }
 
-tbody {
-    height: 433px;       /* Just for the demo          */
+tbody {    
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
 }
@@ -81,19 +95,18 @@ if(isset($_POST['status_btn'])){
 ?>
 
 
-
-<button onclick="window.location.href='details.php?pk=<?php echo $_GET['pk'];?>'">Back</button>
-
 <!-- <h3>Number of people joined : <?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_joined']; ?></h3>
 <h3>Number of people qualified :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_qualified']; ?></h3>
 <h3>Number of people confirmed :<?php echo $arr_get_ppl_in_campaign[0]['no_of_ppl_confirmed']; ?></h3> -->
 
-<h2 style="text-align:center;margin-top:4%"><?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['name']; ?></h2>
+<legend style="text-align:center;margin-top:4%"><?php echo $arr_get_ppl_in_campaign[0]['campaign_data'][0]['name']; ?></legend>
+<div style="text-align:right;margin-right:3%;margin-top:-5%">
+<button onclick="window.location.href='details.php?pk=<?php echo $_GET['pk'];?>'" class="mdl-button mdl-js-button mdl-button--raised">Back</button>
+</div>
 
+<h5 style="text-align:center;"><?php echo "Order to Process";echo " "; echo $arr_get_ppl_in_campaign[0]['total_number']; ?></h5>
 
-<h4 style="text-align:center;"><?php echo "Order to Process";echo " "; echo $arr_get_ppl_in_campaign[0]['total_number']; ?></h4>
-
-<table style="margin-top:3%" id="example" class="mdl-data-table" cellspacing="0" width="100%">
+<table style="margin-top:3%" id="example" class="table table-hover table-mc-light-blue" cellspacing="0" width="100%">
   <thead>
     <tr>
         <th>Sl. No.</th>
@@ -134,16 +147,16 @@ $var=strstr($variable, 'TO', true);
         <!-- <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['pan_details']; ?>" download>Pan Card</td>
         <td><a href="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['aadhar_card_details']; ?>" download>Aadhar Card</td> -->
         <td>
-          <form method="post" action="user_detail.php?cid=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>&user_id=<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>">
+          <form method="post" action="user_detail.php?filter=<?php echo $_GET['filter']; ?>&cid=<?php echo $_GET['pk']; ?>&user_id=<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>">
 
-            <button type="submit">Details</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised" type="submit">Details</button>
             </form>
         </td>
         <td>
          <?php if($arr_get_ppl_in_campaign[0]['user_data'][$x]['delivered'] == "No") { ?>
           <form method="post" action="order_to_process.php?pk=<?php echo $arr_get_ppl_in_campaign[0]['campaign_data']['pk']; ?>">
             <input value="<?php echo $arr_get_ppl_in_campaign[0]['user_data'][$x]['user_data']['pk']; ?>" type="hidden" name="pk_confirm"></input>
-            <button name="status_btn" type="submit">Delivered</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised" name="status_btn" type="submit">Delivered</button>
             </form>
          <?php } else { ?>
           <p>Done</p>
